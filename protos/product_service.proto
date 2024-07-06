@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "gRPC_Client.protos";
+
+message CreateProductRequestDto{
+  string title = 1;
+  string description = 2;
+  int32 price = 3;
+}
+
+message CreateProductResponseDto{
+  int32 productId = 1;
+  string message = 2;
+}
+
+message GetProductByTagRequestDto{
+	string tag=1;
+}
+
+message GetProductByTagResponseDto{
+	string title=1;
+	int32 id=2;
+}
+
+service ProductService{
+  
+	rpc CreateProduct(CreateProductRequestDto) returns (CreateProductResponseDto);
+
+	rpc GetProductByTag(GetProductByTagRequestDto) returns (stream GetProductByTagResponseDto);
+
+}
