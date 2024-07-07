@@ -22,10 +22,21 @@ message GetProductByTagResponseDto{
 	int32 id=2;
 }
 
+message UpdateProductRequestDto{
+	string title=1;
+	string description=2;
+}
+
+message UpdateProductResponseDto{
+	string message=1;
+	int32 status=2;
+}
+
 service ProductService{
   
 	rpc CreateProduct(CreateProductRequestDto) returns (CreateProductResponseDto);
 
 	rpc GetProductByTag(GetProductByTagRequestDto) returns (stream GetProductByTagResponseDto);
 
+	rpc UpdateProduct(stream UpdateProductRequestDto) returns (UpdateProductResponseDto);
 }

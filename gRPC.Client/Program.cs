@@ -29,20 +29,41 @@ try
 
     #region Get product by tag
 
-    var response = productServiceClient.GetProductByTag(new GetProductByTagRequestDto()
+    //var response = productServiceClient.GetProductByTag(new GetProductByTagRequestDto()
+    //{
+    //    Tag = "Tag 1"
+    //});
+
+
+    //while (await response.ResponseStream.MoveNext())
+    //{
+    //    Console.WriteLine($"Product Id : {response.ResponseStream.Current.Id} -- Product Title : {response.ResponseStream.Current.Title}");
+
+    //    Console.WriteLine("----------------------------------");
+
+    //   await Task.Delay(1000);
+    //}
+
+    #endregion
+
+    #region Update product
+
+    var client = productServiceClient.UpdateProduct();
+
+    foreach (var item in Enumerable.Range(1, 10))
     {
-        Tag = "Tag 1"
-    });
-
-
-    while (await response.ResponseStream.MoveNext())
-    {
-        Console.WriteLine($"Product Id : {response.ResponseStream.Current.Id} -- Product Title : {response.ResponseStream.Current.Title}");
-
-        Console.WriteLine("----------------------------------");
-
-       await Task.Delay(1000);
+        await client.RequestStream.WriteAsync(new UpdateProductRequestDto()
+        {
+            Title = $"Title {item}",
+            Description = $"Description {item}"
+        });
     }
+
+    await client.RequestStream.CompleteAsync();
+
+    var response = await client.ResponseAsync;
+
+    Console.WriteLine($"respone message : {response.Message} response status code : {response.Status}");
 
     #endregion
 

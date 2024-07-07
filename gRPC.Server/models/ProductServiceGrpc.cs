@@ -53,6 +53,10 @@ namespace gRPC_Client.protos {
     static readonly grpc::Marshaller<global::gRPC_Client.protos.GetProductByTagRequestDto> __Marshaller_GetProductByTagRequestDto = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::gRPC_Client.protos.GetProductByTagRequestDto.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::gRPC_Client.protos.GetProductByTagResponseDto> __Marshaller_GetProductByTagResponseDto = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::gRPC_Client.protos.GetProductByTagResponseDto.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::gRPC_Client.protos.UpdateProductRequestDto> __Marshaller_UpdateProductRequestDto = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::gRPC_Client.protos.UpdateProductRequestDto.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::gRPC_Client.protos.UpdateProductResponseDto> __Marshaller_UpdateProductResponseDto = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::gRPC_Client.protos.UpdateProductResponseDto.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::gRPC_Client.protos.CreateProductRequestDto, global::gRPC_Client.protos.CreateProductResponseDto> __Method_CreateProduct = new grpc::Method<global::gRPC_Client.protos.CreateProductRequestDto, global::gRPC_Client.protos.CreateProductResponseDto>(
@@ -69,6 +73,14 @@ namespace gRPC_Client.protos {
         "GetProductByTag",
         __Marshaller_GetProductByTagRequestDto,
         __Marshaller_GetProductByTagResponseDto);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::gRPC_Client.protos.UpdateProductRequestDto, global::gRPC_Client.protos.UpdateProductResponseDto> __Method_UpdateProduct = new grpc::Method<global::gRPC_Client.protos.UpdateProductRequestDto, global::gRPC_Client.protos.UpdateProductResponseDto>(
+        grpc::MethodType.ClientStreaming,
+        __ServiceName,
+        "UpdateProduct",
+        __Marshaller_UpdateProductRequestDto,
+        __Marshaller_UpdateProductResponseDto);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -88,6 +100,12 @@ namespace gRPC_Client.protos {
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task GetProductByTag(global::gRPC_Client.protos.GetProductByTagRequestDto request, grpc::IServerStreamWriter<global::gRPC_Client.protos.GetProductByTagResponseDto> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::gRPC_Client.protos.UpdateProductResponseDto> UpdateProduct(grpc::IAsyncStreamReader<global::gRPC_Client.protos.UpdateProductRequestDto> requestStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -151,6 +169,16 @@ namespace gRPC_Client.protos {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_GetProductByTag, null, options, request);
       }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncClientStreamingCall<global::gRPC_Client.protos.UpdateProductRequestDto, global::gRPC_Client.protos.UpdateProductResponseDto> UpdateProduct(grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return UpdateProduct(new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncClientStreamingCall<global::gRPC_Client.protos.UpdateProductRequestDto, global::gRPC_Client.protos.UpdateProductResponseDto> UpdateProduct(grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncClientStreamingCall(__Method_UpdateProduct, null, options);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       protected override ProductServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -166,7 +194,8 @@ namespace gRPC_Client.protos {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_CreateProduct, serviceImpl.CreateProduct)
-          .AddMethod(__Method_GetProductByTag, serviceImpl.GetProductByTag).Build();
+          .AddMethod(__Method_GetProductByTag, serviceImpl.GetProductByTag)
+          .AddMethod(__Method_UpdateProduct, serviceImpl.UpdateProduct).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -178,6 +207,7 @@ namespace gRPC_Client.protos {
     {
       serviceBinder.AddMethod(__Method_CreateProduct, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::gRPC_Client.protos.CreateProductRequestDto, global::gRPC_Client.protos.CreateProductResponseDto>(serviceImpl.CreateProduct));
       serviceBinder.AddMethod(__Method_GetProductByTag, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::gRPC_Client.protos.GetProductByTagRequestDto, global::gRPC_Client.protos.GetProductByTagResponseDto>(serviceImpl.GetProductByTag));
+      serviceBinder.AddMethod(__Method_UpdateProduct, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::gRPC_Client.protos.UpdateProductRequestDto, global::gRPC_Client.protos.UpdateProductResponseDto>(serviceImpl.UpdateProduct));
     }
 
   }
