@@ -43,4 +43,18 @@ public class ProductServiceImp : ProductService.ProductServiceBase
             Status = 200
         };
     }
+
+    public override async Task GetProducyById(IAsyncStreamReader<GetProductByIdRequestDto> requestStream, IServerStreamWriter<GetProductByIdResponseDto> responseStream, ServerCallContext context)
+    {
+        while(await requestStream.MoveNext())
+        {
+            string result = $"Product ID : {requestStream.Current.ProductId}";
+            Console.WriteLine($"{result}  => Recive from client");
+
+           await responseStream.WriteAsync(new GetProductByIdResponseDto()
+            {
+                ProductResult = result
+            });
+        }
+    }
 }

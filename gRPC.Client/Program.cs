@@ -48,22 +48,46 @@ try
 
     #region Update product
 
-    var client = productServiceClient.UpdateProduct();
+    //var client = productServiceClient.UpdateProduct();
 
-    foreach (var item in Enumerable.Range(1, 10))
+    //foreach (var item in Enumerable.Range(1, 10))
+    //{
+    //    await client.RequestStream.WriteAsync(new UpdateProductRequestDto()
+    //    {
+    //        Title = $"Title {item}",
+    //        Description = $"Description {item}"
+    //    });
+    //}
+
+    //await client.RequestStream.CompleteAsync();
+
+    //var response = await client.ResponseAsync;
+
+    //Console.WriteLine($"respone message : {response.Message} response status code : {response.Status}");
+
+    #endregion
+
+    #region Get product by id
+
+    var client = productServiceClient.GetProducyById();
+
+    foreach(var item in Enumerable.Range(10, 20))
     {
-        await client.RequestStream.WriteAsync(new UpdateProductRequestDto()
+        await client.RequestStream.WriteAsync(new GetProductByIdRequestDto()
         {
-            Title = $"Title {item}",
-            Description = $"Description {item}"
+            ProductId = item
         });
+
+        Thread.Sleep(1000);
     }
 
     await client.RequestStream.CompleteAsync();
 
-    var response = await client.ResponseAsync;
-
-    Console.WriteLine($"respone message : {response.Message} response status code : {response.Status}");
+    while (await client.ResponseStream.MoveNext())
+    {
+        string result = $"{client.ResponseStream.Current.ProductResult} => Recive from server";
+        Console.WriteLine(result);
+    }
 
     #endregion
 

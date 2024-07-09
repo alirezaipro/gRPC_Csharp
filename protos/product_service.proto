@@ -32,6 +32,14 @@ message UpdateProductResponseDto{
 	int32 status=2;
 }
 
+message GetProductByIdRequestDto{
+	int32 ProductId=1;
+}
+
+message GetProductByIdResponseDto{
+	string ProductResult=1;
+}
+
 service ProductService{
   
 	rpc CreateProduct(CreateProductRequestDto) returns (CreateProductResponseDto);
@@ -39,4 +47,6 @@ service ProductService{
 	rpc GetProductByTag(GetProductByTagRequestDto) returns (stream GetProductByTagResponseDto);
 
 	rpc UpdateProduct(stream UpdateProductRequestDto) returns (UpdateProductResponseDto);
+
+	rpc GetProducyById(stream GetProductByIdRequestDto) returns (stream GetProductByIdResponseDto);
 }
