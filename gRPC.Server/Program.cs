@@ -10,7 +10,10 @@ try
 {
     server = new Server()
     {
-        Services = { ProductService.BindService(new ProductServiceImp()) },
+        Services = { 
+            ProductService.BindService(new ProductServiceImp()),
+            MathService.BindService(new MathServiceImp())
+        },
         Ports = { new ServerPort("localhost", port, ServerCredentials.Insecure) }
     };
 
