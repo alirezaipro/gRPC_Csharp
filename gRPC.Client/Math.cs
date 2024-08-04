@@ -24,7 +24,7 @@ namespace gRPC.Client
                 DivisionResponseDto response = mathServiceClient.CalculateDivision(new DivisionRequestDto()
                 {
                     Number = 0
-                });
+                },deadline:DateTime.UtcNow.AddSeconds(5));
 
                 Console.WriteLine($"Division result = {response.Result}");
             }

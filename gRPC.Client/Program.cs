@@ -4,7 +4,13 @@ using gRPC.Client;
 
 string target = "127.0.0.1:50051";
 
-var channel = new Channel(target, ChannelCredentials.Insecure);
+var caCrt = File.ReadAllText("ssl/ca.crt");
+var clientCrt = File.ReadAllText("ssl/client.crt");
+var clientKey = File.ReadAllText("ssl/client.key");
+
+var channelCredential = new SslCredentials(caCrt, new KeyCertificatePair(clientCrt, clientKey));
+
+var channel = new Channel("localhost", 50051, channelCredential);
 
 try
 {
@@ -14,19 +20,21 @@ try
 
     #region Product
 
-    //var productServiceClient = new ProductService.ProductServiceClient(channel);
+    var productServiceClient = new ProductService.ProductServiceClient(channel);
 
-    //Product product = new Product(productServiceClient);   
+    Product product = new Product(productServiceClient);
+
+    product.CreateProduct();
 
     #endregion
 
     #region Math
 
-    var mathServiceClient = new MathService.MathServiceClient(channel);
+    //var mathServiceClient = new MathService.MathServiceClient(channel);
 
-    gRPC.Client.Math math = new gRPC.Client.Math(mathServiceClient);
-   
-    math.Division();
+    //gRPC.Client.Math math = new gRPC.Client.Math(mathServiceClient);
+
+    //math.Division();
 
     #endregion
 
